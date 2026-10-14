@@ -4,12 +4,14 @@ const mainNav = document.querySelector('.main-nav');
 menuToggle?.addEventListener('click', () => {
   const isOpen = mainNav.classList.toggle('open');
   menuToggle.setAttribute('aria-expanded', String(isOpen));
+  menuToggle.classList.toggle('open', isOpen);
 });
 
 mainNav?.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => {
     mainNav.classList.remove('open');
     menuToggle?.setAttribute('aria-expanded', 'false');
+    menuToggle?.classList.remove('open');
   });
 });
 
@@ -25,4 +27,7 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
 
 revealItems.forEach((item) => revealObserver.observe(item));
 
-document.querySelector('#year').textContent = new Date().getFullYear();
+const yearElement = document.querySelector('#year');
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
+}
